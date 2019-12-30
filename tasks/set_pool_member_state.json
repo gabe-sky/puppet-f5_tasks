@@ -1,0 +1,39 @@
+{
+  "description": "Set a pool member's state",
+  "input_method": "stdin",
+  "parameters": {
+    "device_name": {
+      "description": "f5 device to connect to",
+      "type": "String[1]"
+    },
+    "device_port": {
+      "description": "optional, f5 port to connect to (default: 443)",
+      "type": "Optional[String[1]]"
+    },
+    "api_user": {
+      "description": "user to authenticate to the API as",
+      "type": "String[1]"
+    },
+    "api_password": {
+      "description": "password to authenticate to the API with",
+      "type": "String[1]",
+      "sensitive": true
+    },
+    "pool_name": {
+      "description": "the pool to modify (e.g. web_servers",
+      "type": "String[1]"
+    },
+    "partition_name": {
+      "description": "optional, partition the pool is in (default: 'Common')",
+      "type": "Optional[String[1]]"
+    },
+    "member_name": {
+      "description": "the name of the pool member to modify (e.g. proton:80)",
+      "type": "String[1]"
+    },
+    "member_state": {
+      "description": "the desired state of 'enabled', 'disabled', or 'offline'",
+      "type": "Enum['enabled','disabled','offline']"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "description": "Delete a UCS backup from /var/local/ucs",
+  "input_method": "stdin",
+  "parameters": {
+    "device_name": {
+      "description": "f5 device to connect to",
+      "type": "String[1]"
+    },
+    "device_port": {
+      "description": "f5 port to connect to (default: 443)",
+      "type": "Optional[String[1]]"
+    },
+    "api_user": {
+      "description": "user to authenticate to the API as",
+      "type": "String[1]"
+    },
+    "api_password": {
+      "description": "password to authenticate to the API with",
+      "type": "String[1]",
+      "sensitive": true
+    },
+    "file_name": {
+      "description": "name of the backup file to delete in /var/local/ucs (e.g. backup-20190420.ucs)",
+      "type": "String[1]"
+    }
+  }
+}
