@@ -46,8 +46,8 @@ pool_name          = params['pool_name']
 partition_name     = params['partition_name'] || 'Common'
 member_name        = params['member_name']
 member_state       = params['member_state']
-member_api_session = String.new
-member_api_state   = String.new
+member_api_session = ''
+member_api_state   = ''
 
 # Take the node_state and turn it into the corresponding session and state
 # settings that the API wants to see.
@@ -65,18 +65,18 @@ end
 
 # Make an HTTP object that's aimed at the f5 device we want to interact with
 #
-http = Net::HTTP.new(device_name,device_port)
+http = Net::HTTP.new(device_name, device_port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 # Craft a request to the API endpoint with proper credentials
 #
 request = Net::HTTP::Put.new("/mgmt/tm/ltm/pool/#{pool_name}/members/~#{partition_name}~#{member_name}")
-request.basic_auth(api_user,api_password)
+request.basic_auth(api_user, api_password)
 
 # Prepare to send JSON to the endpoint, to update the node's state
 #
-request['Content-Type'] = "application/json"
+request['Content-Type'] = 'application/json'
 request.body = "{\"session\":\"#{member_api_session}\",\"state\":\"#{member_api_state}\"}"
 
 # Make the request and populate 'response' with the result

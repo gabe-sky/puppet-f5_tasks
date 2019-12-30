@@ -38,8 +38,8 @@ api_user         = params['api_user']     || 'admin'
 api_password     = params['api_password'] || 'admin'
 node_name        = params['node_name']
 node_state       = params['node_state']
-node_api_session = String.new
-node_api_state   = String.new
+node_api_session = ''
+node_api_state   = ''
 
 # Take the node_state and turn it into the corresponding session and state
 # settings that the API wants to see.
@@ -57,18 +57,18 @@ end
 
 # Make an HTTP object that's aimed at the f5 device we want to interact with
 #
-http = Net::HTTP.new(device_name,device_port)
+http = Net::HTTP.new(device_name, device_port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 # Craft a request to the API endpoint with proper credentials
 #
 request = Net::HTTP::Put.new("/mgmt/tm/ltm/node/#{node_name}")
-request.basic_auth(api_user,api_password)
+request.basic_auth(api_user, api_password)
 
 # Prepare to send JSON to the endpoint, to update the node's state
 #
-request['Content-Type'] = "application/json"
+request['Content-Type'] = 'application/json'
 request.body = "{\"session\":\"#{node_api_session}\",\"state\":\"#{node_api_state}\"}"
 
 # Make the request and populate 'response' with the result

@@ -35,27 +35,27 @@ require 'json'
 # The api_user and api_password default to 'admin' if you don't supply them.
 #
 params = JSON.parse(STDIN.read)
-device_name          = params['device_name']
-device_port          = params['device_port']  || '443'
-api_user             = params['api_user']     || 'admin'
-api_password         = params['api_password'] || 'admin'
-target_user          = params['target_user']
-target_password_hash = params['target_password_hash']
+device_name     = params['device_name']
+device_port     = params['device_port']  || '443'
+api_user        = params['api_user']     || 'admin'
+api_password    = params['api_password'] || 'admin'
+target_user     = params['target_user']
+target_password = params['target_password']
 
 # Make an HTTP object that's aimed at the f5 device we want to interact with
 #
-http = Net::HTTP.new(device_name,device_port)
+http = Net::HTTP.new(device_name, device_port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 # Craft a request to the API endpoint with proper credentials
 #
 request = Net::HTTP::Put.new("/mgmt/tm/auth/user/#{target_user}")
-request.basic_auth(api_user,api_password)
+request.basic_auth(api_user, api_password)
 
 # Prepare to send JSON to the endpoint, to update the target user's password
 #
-request['Content-Type'] = "application/json"
+request['Content-Type'] = 'application/json'
 request.body = "{\"encryptedPassword\":\"#{target_password}\"}"
 
 # Make the request and populate 'response' with the result

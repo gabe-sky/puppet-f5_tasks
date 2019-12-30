@@ -37,19 +37,19 @@ device_group     = params['device_group'] || 'device_trust_group'
 
 # Make an HTTP object that's aimed at the f5 device we want to interact with
 #
-http = Net::HTTP.new(device_name,device_port)
+http = Net::HTTP.new(device_name, device_port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 # Craft a request to the API endpoint with proper credentials
 #
 request = Net::HTTP::Post.new('/mgmt/tm/cm')
-request.basic_auth(api_user,api_password)
+request.basic_auth(api_user, api_password)
 
 # Prepare to send JSON to the endpoint, to trigger a backup to the given
 # file path.
 #
-request['Content-Type'] = "application/json"
+request['Content-Type'] = 'application/json'
 request.body = "{\"command\":\"run\",\"utilCmdArgs\":\"config-sync to-group #{device_group}\"}"
 
 # Make the request and populate 'response' with the result

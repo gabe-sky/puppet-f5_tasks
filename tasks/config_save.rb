@@ -32,20 +32,20 @@ api_password     = params['api_password'] || 'admin'
 
 # Make an HTTP object that's aimed at the f5 device we want to interact with
 #
-http = Net::HTTP.new(device_name,device_port)
+http = Net::HTTP.new(device_name, device_port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 # Craft a request to the API endpoint with proper credentials
 #
 request = Net::HTTP::Post.new('/mgmt/tm/sys/config')
-request.basic_auth(api_user,api_password)
+request.basic_auth(api_user, api_password)
 
 # Prepare to send JSON to the endpoint, to trigger a backup to the given
 # file path.
 #
-request['Content-Type'] = "application/json"
-request.body = "{\"command\":\"save\"}"
+request['Content-Type'] = 'application/json'
+request.body = '{"command":"save"}'
 
 # Make the request and populate 'response' with the result
 #
