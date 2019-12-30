@@ -1,0 +1,28 @@
+{
+  "name": "gabe-f5_tasks",
+  "version": "1.0.0",
+  "author": "Gabe Schuyler",
+  "summary": "Tasks for performing ad-hoc actions on f5 load balancers",
+  "license": "Apache-2.0",
+  "source": "https://github.com/gabe-sky/puppet-f5_tasks",
+  "dependencies": [
+
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "BigIp",
+      "operatingsystemrelease": [
+        "12.1"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.10.0 < 7.0.0"
+    }
+  ],
+  "pdk-version": "1.14.1",
+  "template-url": "pdk-default#1.14.1",
+  "template-ref": "1.14.1-0-g0b5b39b"
+}
